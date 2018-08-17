@@ -1,4 +1,4 @@
-import {ActiveToken, AverageFlowNodeRuntime, IKpiApiService, KpiRequest} from '@process-engine/kpi_api_contracts';
+import {ActiveToken, FlowNodeRuntimeInformation, IKpiApiService, KpiRequest} from '@process-engine/kpi_api_contracts';
 
 import {Response} from 'express';
 
@@ -17,19 +17,21 @@ export class KpiApiController {
     return this._kpiService;
   }
 
-  public async getAverageRuntimeForProcessModel(request: KpiRequest, response: Response): Promise<void> {
+  public async getRuntimeInformationForProcessModel(request: KpiRequest, response: Response): Promise<void> {
     const processModelId: string = request.params.process_model_id;
 
-    const result: Array<AverageFlowNodeRuntime> = await this.kpiService.getAverageRuntimeForProcessModel(request.identity, processModelId);
+    const result: Array<FlowNodeRuntimeInformation> =
+      await this.kpiService.getRuntimeInformationForProcessModel(request.identity, processModelId);
 
     response.status(this.httpCodeSuccessfulResponse).json(result);
   }
 
-  public async getAverageRuntimeForFlowNode(request: KpiRequest, response: Response): Promise<void> {
+  public async getRuntimeInformationForFlowNode(request: KpiRequest, response: Response): Promise<void> {
     const processModelId: string = request.params.process_model_id;
     const flowNodeId: string = request.params.flow_node_id;
 
-    const result: AverageFlowNodeRuntime = await this.kpiService.getAverageRuntimeForFlowNode(request.identity, processModelId, flowNodeId);
+    const result: FlowNodeRuntimeInformation =
+      await this.kpiService.getRuntimeInformationForFlowNode(request.identity, processModelId, flowNodeId);
 
     response.status(this.httpCodeSuccessfulResponse).json(result);
   }

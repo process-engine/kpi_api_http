@@ -36,8 +36,8 @@ export class KpiApiRouter extends BaseRouter {
   private registerRoutes(): void {
     const controller: KpiApiController = this.kpiApiRestController;
 
-    this.router.get(restSettings.paths.getAverageRuntimeForProcessModel, wrap(controller.getAverageRuntimeForProcessModel.bind(controller)));
-    this.router.get(restSettings.paths.getAverageRuntimeForFlowNode, wrap(controller.getAverageRuntimeForFlowNode.bind(controller)));
+    this.router.get(restSettings.paths.getRuntimeInformationForProcessModel, wrap(controller.getRuntimeInformationForProcessModel.bind(controller)));
+    this.router.get(restSettings.paths.getRuntimeInformationForFlowNode, wrap(controller.getRuntimeInformationForFlowNode.bind(controller)));
     this.router.get(restSettings.paths.getActiveTokensForProcessModel, wrap(controller.getActiveTokensForProcessModel.bind(controller)));
     this.router.get(restSettings.paths.getActiveTokensForFlowNode, wrap(controller.getActiveTokensForFlowNode.bind(controller)));
   }
