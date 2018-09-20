@@ -1,4 +1,4 @@
-import {ActiveToken, FlowNodeRuntimeInformation, IKpiApiService, KpiRequest} from '@process-engine/kpi_api_contracts';
+import {ActiveToken, FlowNodeRuntimeInformation, IKpiApi, KpiRequest} from '@process-engine/kpi_api_contracts';
 
 import {Response} from 'express';
 
@@ -7,13 +7,13 @@ export class KpiApiController {
 
   private httpCodeSuccessfulResponse: number = 200;
 
-  private _kpiService: IKpiApiService;
+  private _kpiService: IKpiApi;
 
-  constructor(kpiService: IKpiApiService) {
+  constructor(kpiService: IKpiApi) {
     this._kpiService = kpiService;
   }
 
-  private get kpiService(): IKpiApiService {
+  private get kpiService(): IKpiApi {
     return this._kpiService;
   }
 
