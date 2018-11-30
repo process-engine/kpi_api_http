@@ -44,6 +44,17 @@ export class KpiApiController {
     response.status(this.httpCodeSuccessfulResponse).json(result);
   }
 
+  public async getActiveTokensForCorrelationAndProcessModel(request: KpiRequest, response: Response): Promise<void> {
+    const correlationId: string = request.params.correlation_id;
+    const processModelId: string = request.params.process_model_id;
+
+    const result: Array<ActiveToken> = await this.kpiService.getActiveTokensForCorrelationAndProcessModel(request.identity,
+                                                                                                          correlationId,
+                                                                                                          processModelId);
+
+    response.status(this.httpCodeSuccessfulResponse).json(result);
+  }
+
   public async getActiveTokensForFlowNode(request: KpiRequest, response: Response): Promise<void> {
     const flowNodeId: string = request.params.flow_node_id;
 
