@@ -48,9 +48,9 @@ export class KpiApiController {
     const correlationId: string = request.params.correlation_id;
     const processModelId: string = request.params.process_model_id;
 
-    const result: Array<ActiveToken> = await this.kpiService.getActiveTokensForCorrelationAndProcessModel(request.identity,
-                                                                                                          correlationId,
-                                                                                                          processModelId);
+    const result: Array<ActiveToken> = await this
+      .kpiService
+      .getActiveTokensForCorrelationAndProcessModel(request.identity, correlationId, processModelId);
 
     response.status(this.httpCodeSuccessfulResponse).json(result);
   }
