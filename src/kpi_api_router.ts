@@ -41,6 +41,7 @@ export class KpiApiRouter extends BaseRouter {
     this.router.get(restSettings.paths.getActiveTokensForProcessModel, wrap(controller.getActiveTokensForProcessModel.bind(controller)));
     this.router.get(restSettings.paths.getActiveTokensForCorrelationAndProcessModel,
                     wrap(controller.getActiveTokensForCorrelationAndProcessModel.bind(controller)));
+    this.router.get(restSettings.paths.getActiveTokensForProcessInstance, wrap(controller.getActiveTokensForProcessInstance.bind(controller)));
     this.router.get(restSettings.paths.getActiveTokensForFlowNode, wrap(controller.getActiveTokensForFlowNode.bind(controller)));
   }
 }
