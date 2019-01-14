@@ -55,6 +55,14 @@ export class KpiApiController {
     response.status(this.httpCodeSuccessfulResponse).json(result);
   }
 
+  public async getActiveTokensForProcessInstance(request: KpiRequest, response: Response): Promise<void> {
+    const processInstanceId: string = request.params.process_instance_id;
+
+    const result: Array<ActiveToken> = await this.kpiService.getActiveTokensForProcessInstance(request.identity, processInstanceId);
+
+    response.status(this.httpCodeSuccessfulResponse).json(result);
+  }
+
   public async getActiveTokensForFlowNode(request: KpiRequest, response: Response): Promise<void> {
     const flowNodeId: string = request.params.flow_node_id;
 
