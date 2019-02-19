@@ -1,19 +1,22 @@
-import {BaseRouter} from '@essential-projects/http_node';
-import {restSettings} from '@process-engine/kpi_api_contracts';
-
 import {wrap} from 'async-middleware';
 
-import {KpiApiController} from './kpi_api_controller';
+import {BaseRouter} from '@essential-projects/http_node';
+import {IIdentityService} from '@essential-projects/iam_contracts';
 
-import {resolveKpiContext} from './middlewares';
+import {restSettings} from '@process-engine/kpi_api_contracts';
+
+import {KpiApiController} from './kpi_api_controller';
+import {createResolveIdentityMiddleware, MiddlewareFunction} from './middlewares/index';
 
 export class KpiApiRouter extends BaseRouter {
 
   private _kpiApiRestController: KpiApiController;
+  private _identityService: IIdentityService;
 
-  constructor(kpiApiRestController: KpiApiController) {
+  constructor(kpiApiRestController: KpiApiController, identityService: IIdentityService) {
     super();
     this._kpiApiRestController = kpiApiRestController;
+    this._identityService = identityService;
   }
 
   private get kpiApiRestController(): KpiApiController {
@@ -30,7 +33,8 @@ export class KpiApiRouter extends BaseRouter {
   }
 
   private registerMiddlewares(): void {
-    this.router.use(wrap(resolveKpiContext));
+    const resolveIdentity: MiddlewareFunction = createResolveIdentityMiddleware(this._identityService);
+    this.router.use(wrap(resolveIdentity));
   }
 
   private registerRoutes(): void {
