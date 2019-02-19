@@ -1,1 +1,1 @@
-export * from './resolve_kpi_context';
+export * from './resolve_identity';
